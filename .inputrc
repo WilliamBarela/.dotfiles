@@ -1,0 +1,16 @@
+# master ~/.inputrc
+# author: srce
+
+# bash without vim is bad
+set editing-mode vi
+set show-mode-in-prompt on
+
+# autocompletion customizations
+set page-completions on
+set completion-ignore-case on
+set completion-query-items 200
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set mark-directories on
+set bell-style visible
+# set print-completions-horizontally on
