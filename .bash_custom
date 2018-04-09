@@ -1,0 +1,17 @@
+# source git-prompt.sh
+if [ -f ~/.git-prompt.sh ]; then
+  source ~/.git-prompt.sh
+fi
+
+# source git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  source ~/.git-completion.bash
+fi
+
+# customize prompt for git
+USER="\[\e[32m\]\u\[\e[m\]"     # apply green color to user \u
+HOST="\[\e[31m\]\h\[\e[m\]"     # apply red color to host \h
+WD='\[\e[36;40m\]\W\[\e[m\]' #"\W"                       # show working directory
+GITBRANCH='\[\e[33m\]$(__git_ps1 "(%s)")\[\e[m\]'
+#$(__git_ps1 " (%s)")
+PS1='['$USER'@'$HOST' '$WD' '$GITBRANCH']\$ '
