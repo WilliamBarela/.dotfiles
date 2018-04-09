@@ -4,6 +4,15 @@
 # bash without vim is bad
 set editing-mode vi
 set show-mode-in-prompt on
+$if mode=vi
+  set keymap vi-command 
+  # for vi-command mode
+  Control-l: clear-screen
+
+  set keymap vi-insert
+  # for vi-insert mode
+  Control-l: clear-screen
+$endif
 
 # autocompletion customizations
 set page-completions on
