@@ -1,3 +1,5 @@
 [user]
 	email = william.barela.dev@gmail.com
 	name = William Barela
+[color]
+  ui = true
