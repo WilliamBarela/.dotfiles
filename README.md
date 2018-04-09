@@ -4,7 +4,7 @@
 The .vimrc file was inspired by the community post here:
 https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim?rq=1
 
-Some productivity tips:
+## Some productivity tips:
 
   ### Smart movements
 
