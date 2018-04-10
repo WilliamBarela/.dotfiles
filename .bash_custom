@@ -11,7 +11,7 @@ fi
 # customize prompt for git
 USER="\[\e[32m\]\u\[\e[m\]"     # apply green color to user \u
 HOST="\[\e[31m\]\h\[\e[m\]"     # apply red color to host \h
-WD='\[\e[36;40m\]\W\[\e[m\]' #"\W"                       # show working directory
-GITBRANCH='\[\e[33m\]$(__git_ps1 "(%s)")\[\e[m\]'
+WD='\[\e[36m\]\W\[\e[m\]' #"\W"                       # show working directory
+GITBRANCH='\[\e[34m\]$(__git_ps1 "(%s)")\[\e[m\]'
 #$(__git_ps1 " (%s)")
 PS1='['$USER'@'$HOST' '$WD' '$GITBRANCH']\$ '
