@@ -7,6 +7,7 @@ cp ~/.git-prompt.sh ~/.olddots/.git-prompt.sh.bak
 cp ~/.gitconfig ~/.olddots/.gitconfig.bak
 cp ~/.inputrc ~/.olddots/.inputrc.bak
 cp ~/.vimrc ~/.olddots/.vimrc.bak
+cp ~/.tmux.conf ~/.olddots/.tmux.conf.bak
 cp -R ~/.vim ~/.olddots/.vim.bak
 echo "all previous dotfiles were saved as backups in ~/.olddots"
 
@@ -18,5 +19,6 @@ cp ./.git-prompt.sh ~/.git-prompt.sh
 cp ./.gitconfig ~/.gitconfig
 cp ./.inputrc ~/.inputrc
 cp -R ./.vim ~/.vim
+cp ./.tmux.conf ~/.tmux.conf
 cp ./.vimrc ~/.vimrc
 echo "All of your dotfiles have been copied over!"
