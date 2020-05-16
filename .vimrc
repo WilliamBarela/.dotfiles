@@ -45,6 +45,16 @@ if &t_Co > 2 || has("gui_running")
   set incsearch          " search incrementally (i.e., search as you type)
 endif
 
+" set status line color
+hi StatusLine ctermbg=235 ctermfg=190
+" set status line color of horizontal split
+hi StatusLineNC ctermbg=165 ctermfg=235
+" set status line color of vertical split
+hi VertSplit ctermbg=237 ctermfg=235
+
+" set numberline color
+hi LineNr ctermfg=235
+
 " <ctrl-l> to redraw the screen and remove any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
