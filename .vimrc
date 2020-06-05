@@ -2,10 +2,21 @@ if &compatible
   set nocompatible " be iMproved required
 endif
 
+call plug#begin('~/.vim/plugged')
+
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'rafalbromirski/vim-aurora'
+
+call plug#end()
+
 filetype plugin indent on " required
 
 " display settings
-colorscheme koehler     " setting color scheme
+" colorscheme koehler     " setting color scheme
+set termguicolors
+set background=dark
+colorscheme aurora
 set nowrap              " nowrap of lines on screen
 set scrolloff=2         " how many lines to scroll with mouse wheel
 set number              " setting line numbering 
@@ -33,6 +44,11 @@ set hidden              " remember undo after quitting
 set history=200         " keep 200 lines of command history
 set mouse=v             " use mouse in visual mode (not normal, insert, command, help mode)
 
+" folding settings
+" set foldmethod=manual
+" set foldnestmax=10
+" set foldlevel=2
+" set nofoldenable
 
 " use built in fuzzy finder in vim
 set path+=**
@@ -45,21 +61,44 @@ if &t_Co > 2 || has("gui_running")
   set incsearch          " search incrementally (i.e., search as you type)
 endif
 
-" set status line color
+" ensure that transparency is true:
+" hi NonText guibg=NONE ctermbg=NONE
+" hi Normal guibg=NONE ctermbg=NONE
+
+" set statusline color
 hi StatusLine ctermbg=235 ctermfg=190
-" set status line color of horizontal split
 hi StatusLineNC ctermbg=165 ctermfg=235
-" set status line color of vertical split
 hi VertSplit ctermbg=237 ctermfg=235
 
 " set numberline color
-hi LineNr ctermfg=235
+hi LineNr ctermfg=101
+
+" set fold line color
+hi Folded ctermbg=NONE ctermfg=159
 
 " <ctrl-l> to redraw the screen and remove any search highlighting
 nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " file type specific settings
 set ffs=unix " setting to show Window's style file ending carriage return ^M
+
+" make files remember folds when reopening
+" augroup remember_folds
+"   autocmd!
+"   autocmd BufWinLeave * mkview
+"   autocmd BufWinEnter * silent! loadview
+" augroup END
+
+ let g:user_emmet_settings = {
+ \  'eruby' : {
+ \    'extends' : 'html',
+ \    'snippets' : {
+ \      'erb' : "<% | %>\n\t${child}\n<% end %>",
+ \      'e' : "<% | %>\n",
+ \      'ee' : "<%= | %>\n",
+ \    }
+ \  }
+ \}
 
 if has("autocmd")
   augroup mysettings
