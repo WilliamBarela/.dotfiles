@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'rafalbromirski/vim-aurora'
+Plug 'ap/vim-css-color'
 
 call plug#end()
 

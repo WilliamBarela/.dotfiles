@@ -1,12 +1,12 @@
 # Whoever uses this .gitconfig file should remove all comment tags and change the email and name below.
 # Please be aware of what vimdiff is before uncommenting that one.
 
-# [user]
-#   email = william.barela.dev@gmail.com
-#   name = William Barela
-# [color]
-#   ui = true
-# [merge]
-#   tool = vimdiff
-# [alias]
-#  root = rev-parse --show-toplevel
+[user]
+  email = william.barela.dev@gmail.com
+  name = William Barela
+[color]
+  ui = true
+[merge]
+  tool = vimdiff
+[alias]
+ root = rev-parse --show-toplevel
