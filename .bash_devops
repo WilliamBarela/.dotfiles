@@ -1,0 +1,80 @@
+# keyreader
+keyreader() {
+  local gpg_file=$1
+  local key=$(gpg -d "$gpg_file" 2> /dev/null)
+
+  if [ -z $key ]
+    then
+      >&2 echo -e "bad gpg_file or password for gpg"
+    else
+      echo -n $key
+  fi
+}
+
+# prints the remote for a given remote type
+select_remote() {
+  line=$1
+  echo -n $(git remote -v | sed -n ""$line"" | awk '{print $2}')
+}
+
+# remote fetch location
+git_remote() {
+  local line
+  local git_command=$1
+
+  if [[ $git_command = 'pull' || $git_command = 'fetch' ]]
+    then
+    line="1p"
+    echo -n $(select_remote $line)
+  elif [[ $git_command = 'push' ]]
+    then
+    line="2p"
+    echo -n $(select_remote $line)
+  elif [[ $git_command = clone ]]
+    then
+    echo -n ""
+  fi
+
+}
+
+# string together repo address with credentials
+git_repo_w_creds() {
+  local gpg_file=$1
+  local git_command=$2
+  local clone_url=$3
+
+  local remote=
+
+  if [ -z $clone_url ]
+    then
+    remote=$(git_remote $git_command)
+  else
+    remote=$clone_url
+  fi
+
+  local user="$(echo -n $remote | awk -F "@" '{print $1}')"
+  local repo="$(echo -n $remote | awk -F "@" '{print $2}')"
+
+  local pat=$(keyreader $gpg_file)
+
+  echo -n "$user:"$pat"@$repo"
+}
+
+# remote commands clone, pull, push, fetch
+gitops() {
+  local gpg_file="$HOME/.keys/.devops.gpg"
+  local git_command=$1
+  local clone_url=$2
+
+
+  if [[ $git_command = 'clone' ]]
+  then
+    echo -e "\n\n\033[4;31m"$(keyreader $gpg_file)"\033[0m\n\n"
+    git clone $clone_url
+  elif [[ $git_command = 'push' || $git_command = 'pull' || $git_command = 'fetch' ]]
+  then
+    git $* "$(git_repo_w_creds $gpg_file $git_command)"
+  else
+    >&2 echo -e "\033[4;31mWARNING!\033[0m use \033[4;33mgitops\033[0m for \033[4;36mpull\033[0m, \033[4;36mfetch\033[0m, \033[4;36mpush\033[0m, and \033[4;36mclone\033[0m operations; use \033[4;33mgit\033[0m for all others\n\n-- operation \033[2;31maborted\033[0m, no work done\n"
+  fi
+}
