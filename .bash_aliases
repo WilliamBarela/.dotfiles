@@ -30,4 +30,8 @@ alias ttu="clear; ssh -fNTX -L 2222:senj.ttu.edu:22 wilbarel@ssh.ttu.edu"
 
 alias endo="clear; ssh -fNT -L 2223:endo.ttu.edu:22 wilbarel@ssh.ttu.edu && ssh -p 2223 zrce@localhost"
 
+# cls
+# https://stackoverflow.com/questions/5367068/clear-a-terminal-screen-for-real/5367075#5367075
+alias cls='echo -en "\ec"'
+
 source ~/.bash_devops
