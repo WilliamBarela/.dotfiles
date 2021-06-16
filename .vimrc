@@ -13,6 +13,9 @@ call plug#end()
 
 filetype plugin indent on " required
 
+" remap :winc / <C-w> to \ + w
+:nnoremap <Leader>w <C-w>
+
 " display settings
 " colorscheme koehler     " setting color scheme
 set termguicolors
