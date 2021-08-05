@@ -1,11 +1,11 @@
 # dotfiles for Ubuntu based systems
 
 ## fuzzy find in vim accross project:
-[https://www.freecodecamp.org/news/how-to-search-project-wide-vim-ripgrep-ack/](ripgrep and ack)
+[https://www.freecodecamp.org/news/how-to-search-project-wide-vim-ripgrep-ack/] (ripgrep and ack)
 
 ## notes for ~/.vimrc file
 The .vimrc file was inspired by the community post here:
-[https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim?rq=1]()
+[https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim?rq=1] ()
 
 ## Some productivity tips:
 
