@@ -8,6 +8,7 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'rafalbromirski/vim-aurora'
 Plug 'ap/vim-css-color'
+Plug 'mileszs/ack.vim'
 
 call plug#end()
 
@@ -34,11 +35,18 @@ set title               " show title in titlebar
 set matchpairs+=<:>     " inlcude <> as matching pairs
 
 " tab settings
-set tabstop=2 		      " sets tab indent to 2 spaces
-set shiftwidth=2	      " sets how wide shift will indent
-set expandtab		        " converts tabs into spaces
+set tabstop=2           " sets tab indent to 2 spaces
+set softtabstop=2
+set shiftwidth=2        " sets how wide shift will indent
+set expandtab           " converts tabs into spaces
 set smartindent         " smart auto-indenting
 set smarttab            " smart tab handling for indenting
+" :retab will use settings to retab the file
+
+" LIST settings
+set list                " show whitespace
+set lcs=                " sets eol character to blank, still shows tabs. But not sure if it does anything else
+" set lcs+=space:·      " shows all spaces in file
 
 " system settings
 set confirm             " get a dialog when :q, :w, or :wq fails
@@ -46,7 +54,19 @@ set laststatus=2        " two lines for status bar
 set viminfo='20,\"500   " remember copy registers after quitting in the .viminfo file --20 jump links, regs up to 500 lines
 set hidden              " remember undo after quitting
 set history=200         " keep 200 lines of command history
-set mouse=v             " use mouse in visual mode (not normal, insert, command, help mode)
+" set mouse=v           " use mouse in visual mode (not normal, insert, command, help mode)
+set mouse=nvi           " use mouse in normal, visual, and insert modes (and NOT in command mode) | allows you to resize splits, select text and copy if +xterm_clipboard is supported as in vim-athena
+" :vmap <C-C> "+y         " map ctrl+c to mean copy to clipboard (only works with +xtermn_clipboard versions of vim 
+vnoremap <C-C> "+y         " map ctrl+c to mean copy to clipboard (only works with +xtermn_clipboard versions of vim 
+
+" If you don't have access to +xterm_clipboard:
+" set mouse=nvi and
+" to select text, hold ctrl+shift and select with mouse;
+" to copy, hold shift and right click and click copy
+" or, just press ctrl+shift+c like usual
+
+" alias ctrl + w with \w
+:nnoremap <Leader>w <C-w>
 
 " folding settings
 " set foldmethod=manual
@@ -75,7 +95,8 @@ hi StatusLineNC ctermbg=165 ctermfg=235
 hi VertSplit ctermbg=237 ctermfg=235
 
 " set numberline color
-hi LineNr ctermfg=101
+" hi LineNr ctermfg=101
+hi LineNr ctermfg=93
 
 " set fold line color
 hi Folded ctermbg=NONE ctermfg=159
@@ -93,6 +114,39 @@ set ffs=unix " setting to show Window's style file ending carriage return ^M
 "   autocmd BufWinEnter * silent! loadview
 " augroup END
 
+" ack plugin config:
+" #############################################################
+
+" ack.vim --- {{{
+
+" Use ripgrep for searching
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --type-not sql -> Avoid huge sql file dumps as it slows down the search
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
+
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
+
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
+
+" Don't jump to first match
+cnoreabbrev Ack Ack!
+
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>/ :Ack!<Space>
+" }}}
+
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
+
+
+" emmet vim settings 
+" #############################################################
+
  let g:user_emmet_settings = {
  \  'eruby' : {
  \    'extends' : 'html',
@@ -104,11 +158,26 @@ set ffs=unix " setting to show Window's style file ending carriage return ^M
  \  }
  \}
 
+" AUTOCMD for tab stops for different file types (seems to not work with
+" sessions
 if has("autocmd")
   augroup mysettings
     " set all other file extentions except python to 2 space tab
-    au FileType css,html,javascript,sh,config,c,cpp,ruby set smartindent shiftwidth=2 softtabstop=2 expandtab
+    au FileType css,html,javascript,jsx,sh,config,c,cpp,ruby,rb set smartindent shiftwidth=2 softtabstop=2 expandtab
     " set python to conform to PEP8 standards
     au FileType python set tabstop=4 softtabstop=4 expandtab shiftwidth=4 cinwords=if,elif,else,for,while,try,except,finally,def,class
   augroup END
 endif "has("autocmd")
+
+" retab on close
+" fu! ResetSpaces()
+"   %retab!
+" endfunction
+
+" autocmd BufWritePre * :call ResetSpaces()
+
+" remember last position where you edited
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
