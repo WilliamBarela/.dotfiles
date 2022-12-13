@@ -25,11 +25,6 @@ alias httpserver="python3 -m http.server 2785"    # spin up a web server with py
 # rails specific aliases:
 alias treemvc="clear; tree app/models/ app/views/ app/controllers/"
 
-# ssh
-alias ttu="clear; ssh -fNTX -L 2222:senj.ttu.edu:22 wilbarel@ssh.ttu.edu"
-
-alias endo="clear; ssh -fNT -L 2223:endo.ttu.edu:22 wilbarel@ssh.ttu.edu && ssh -p 2223 zrce@localhost"
-
 # cls
 # https://stackoverflow.com/questions/5367068/clear-a-terminal-screen-for-real/5367075#5367075
 alias cls='echo -en "\ec"'
