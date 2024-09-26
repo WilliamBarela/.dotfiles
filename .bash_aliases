@@ -3,6 +3,10 @@ alias la="clear; LC_COLLATE=C ls -hal"
 alias l="clear; LC_COLLATE=C ls -hl"
 alias lr="clear; LC_COLLATE=C ls -haltr"
 
+# Go convenience aliases:
+alias gocover="go test -coverprofile=coverage.tmp > /dev/null && go tool cover -func=coverage.tmp && rm coverage.tmp"
+alias gocoverhtml="go test -coverprofile=coverage.tmp > /dev/null && go tool cover -html=coverage.tmp && rm coverage.tmp"
+
 # swapkiller
 alias swapfresh="free -h; sudo swapoff -a && sudo swapon -a; echo '##################'; echo 'swap cleared!'; echo '##################'; free -h;"
 
@@ -28,5 +32,3 @@ alias treemvc="clear; tree app/models/ app/views/ app/controllers/"
 # cls
 # https://stackoverflow.com/questions/5367068/clear-a-terminal-screen-for-real/5367075#5367075
 alias cls='echo -en "\ec"'
-
-source ~/.bash_devops
